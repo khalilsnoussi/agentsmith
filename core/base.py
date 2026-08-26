@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic, cast
 import asyncio
+import json
 from concurrent.futures import ThreadPoolExecutor
 
 
@@ -32,3 +33,6 @@ class Runnable(ABC, Generic[Input, Output]):
     async def abatch(self, inputs : list[Input]) -> list[Output]:
         coroutines = map(self.ainvoke, inputs)
         return await asyncio.gather(*coroutines)
+
+    def serialize(self):
+        pass
